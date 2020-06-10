@@ -22,4 +22,18 @@ Vagrant.configure("2") do |config|
                 node.vm.network :private_network, ip: "192.168.100.12"
         end
 
+        config.vm.define "manager2" do |node|
+                node.vm.hostname='manager2'
+                node.vm.provision :docker
+                node.vm.network :private_network, ip: "192.168.100.13"
+                node.vm.network :forwarded_port, guest: 8080, host: 9081
+        end
+
+        config.vm.define "manager3" do |node|
+                node.vm.hostname='manager3'
+                node.vm.provision :docker
+                node.vm.network :private_network, ip: "192.168.100.14"
+                node.vm.network :forwarded_port, guest: 8080, host: 9082
+        end
+
 end
